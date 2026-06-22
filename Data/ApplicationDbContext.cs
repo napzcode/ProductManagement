@@ -26,7 +26,7 @@ namespace ProductManagement.Data
                     Price = 1299.99m,
                     Stock = 25,
                     Category = "Electronics",
-                    CreatedAt = new DateTime(2024, 1, 1),
+                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsActive = true
                 },
                 new Product
@@ -37,7 +37,7 @@ namespace ProductManagement.Data
                     Price = 29.99m,
                     Stock = 150,
                     Category = "Accessories",
-                    CreatedAt = new DateTime(2024, 1, 1),
+                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsActive = true
                 },
                 new Product
@@ -48,7 +48,7 @@ namespace ProductManagement.Data
                     Price = 49.99m,
                     Stock = 80,
                     Category = "Accessories",
-                    CreatedAt = new DateTime(2024, 1, 1),
+                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsActive = true
                 }
             );
