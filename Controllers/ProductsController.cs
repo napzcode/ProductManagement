@@ -90,7 +90,7 @@ namespace ProductManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                product.CreatedAt = DateTime.Now;
+                product.CreatedAt = DateTime.UtcNow;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 TempData["Success"] = $"Product '{product.Name}' was created successfully.";
@@ -124,7 +124,7 @@ namespace ProductManagement.Controllers
             {
                 try
                 {
-                    product.UpdatedAt = DateTime.Now;
+                    product.UpdatedAt = DateTime.UtcNow;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                     TempData["Success"] = $"Product '{product.Name}' was updated successfully.";
