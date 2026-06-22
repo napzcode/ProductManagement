@@ -1,0 +1,93 @@
+@model ProductManagement.Models.Product
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<div class="container py-4" style="max-width: 700px;">
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index">Products</a></li>
+                <li class="breadcrumb-item active">Create</li>
+            </ol>
+        </nav>
+        <h2 class="fw-bold"><i class="bi bi-plus-circle me-2 text-primary"></i>Create New Product</h2>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label asp-for="Name" class="form-label fw-semibold"></label>
+                        <input asp-for="Name" class="form-control" placeholder="Enter product name" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Category" class="form-label fw-semibold"></label>
+                        <input asp-for="Category" class="form-control" placeholder="e.g. Electronics" list="categoryList" />
+                        <datalist id="categoryList">
+                            <option value="Electronics"></option>
+                            <option value="Accessories"></option>
+                            <option value="Clothing"></option>
+                            <option value="Food & Beverage"></option>
+                            <option value="Home & Garden"></option>
+                            <option value="Sports"></option>
+                            <option value="Books"></option>
+                            <option value="Other"></option>
+                        </datalist>
+                        <span asp-validation-for="Category" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Description" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"
+                                  placeholder="Optional product description..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Price" class="form-label fw-semibold"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input asp-for="Price" class="form-control" placeholder="0.00" />
+                        </div>
+                        <span asp-validation-for="Price" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Stock" class="form-label fw-semibold"></label>
+                        <input asp-for="Stock" class="form-control" placeholder="0" />
+                        <span asp-validation-for="Stock" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check form-switch">
+                            <input asp-for="IsActive" class="form-check-input" role="switch" />
+                            <label asp-for="IsActive" class="form-check-label fw-semibold">Active Product</label>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-floppy me-1"></i> Save Product
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-x-lg me-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

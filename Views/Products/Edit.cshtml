@@ -1,0 +1,107 @@
+@model ProductManagement.Models.Product
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<div class="container py-4" style="max-width: 700px;">
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index">Products</a></li>
+                <li class="breadcrumb-item active">Edit</li>
+            </ol>
+        </nav>
+        <h2 class="fw-bold"><i class="bi bi-pencil-square me-2 text-primary"></i>Edit Product</h2>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedAt" />
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label asp-for="Name" class="form-label fw-semibold"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Category" class="form-label fw-semibold"></label>
+                        <input asp-for="Category" class="form-control" list="categoryList" />
+                        <datalist id="categoryList">
+                            <option value="Electronics"></option>
+                            <option value="Accessories"></option>
+                            <option value="Clothing"></option>
+                            <option value="Food & Beverage"></option>
+                            <option value="Home & Garden"></option>
+                            <option value="Sports"></option>
+                            <option value="Books"></option>
+                            <option value="Other"></option>
+                        </datalist>
+                        <span asp-validation-for="Category" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Description" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Price" class="form-label fw-semibold"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input asp-for="Price" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Price" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Stock" class="form-label fw-semibold"></label>
+                        <input asp-for="Stock" class="form-control" />
+                        <span asp-validation-for="Stock" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check form-switch">
+                            <input asp-for="IsActive" class="form-check-input" role="switch" />
+                            <label asp-for="IsActive" class="form-check-label fw-semibold">Active Product</label>
+                        </div>
+                    </div>
+
+                    @if (Model.UpdatedAt.HasValue)
+                    {
+                        <div class="col-12">
+                            <small class="text-muted">
+                                <i class="bi bi-clock-history me-1"></i>
+                                Last updated: @Model.UpdatedAt.Value.ToString("MMM dd, yyyy HH:mm")
+                            </small>
+                        </div>
+                    }
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-floppy me-1"></i> Save Changes
+                    </button>
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info px-4">
+                        <i class="bi bi-eye me-1"></i> View Details
+                    </a>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-x-lg me-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

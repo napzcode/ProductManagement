@@ -1,0 +1,92 @@
+@model ProductManagement.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container py-4" style="max-width: 700px;">
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index">Products</a></li>
+                <li class="breadcrumb-item active">Details</li>
+            </ol>
+        </nav>
+        <h2 class="fw-bold"><i class="bi bi-info-circle me-2 text-info"></i>Product Details</h2>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-semibold fs-5">@Model.Name</span>
+            @if (Model.IsActive)
+            {
+                <span class="badge bg-success">Active</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">Inactive</span>
+            }
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 text-muted">Product ID</dt>
+                <dd class="col-sm-8">@Model.Id</dd>
+
+                <dt class="col-sm-4 text-muted">Name</dt>
+                <dd class="col-sm-8 fw-semibold">@Model.Name</dd>
+
+                <dt class="col-sm-4 text-muted">Category</dt>
+                <dd class="col-sm-8">
+                    <span class="badge bg-secondary rounded-pill">@Model.Category</span>
+                </dd>
+
+                <dt class="col-sm-4 text-muted">Description</dt>
+                <dd class="col-sm-8">@(Model.Description ?? "—")</dd>
+
+                <dt class="col-sm-4 text-muted">Price</dt>
+                <dd class="col-sm-8 text-success fw-bold fs-5">@Model.Price.ToString("C")</dd>
+
+                <dt class="col-sm-4 text-muted">Stock Quantity</dt>
+                <dd class="col-sm-8">
+                    @if (Model.Stock == 0)
+                    {
+                        <span class="text-danger fw-bold">0 — Out of Stock</span>
+                    }
+                    else if (Model.Stock < 10)
+                    {
+                        <span class="text-warning fw-bold">@Model.Stock — Low Stock</span>
+                    }
+                    else
+                    {
+                        <span>@Model.Stock units</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-4 text-muted">Status</dt>
+                <dd class="col-sm-8">@(Model.IsActive ? "Active" : "Inactive")</dd>
+
+                <dt class="col-sm-4 text-muted">Created At</dt>
+                <dd class="col-sm-8">@Model.CreatedAt.ToString("MMMM dd, yyyy HH:mm")</dd>
+
+                @if (Model.UpdatedAt.HasValue)
+                {
+                    <dt class="col-sm-4 text-muted">Last Updated</dt>
+                    <dd class="col-sm-8">@Model.UpdatedAt.Value.ToString("MMMM dd, yyyy HH:mm")</dd>
+                }
+            </dl>
+        </div>
+        <div class="card-footer bg-transparent">
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                    <i class="bi bi-pencil me-1"></i> Edit
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                    <i class="bi bi-trash me-1"></i> Delete
+                </a>
+                <a asp-action="Index" class="btn btn-outline-secondary ms-auto">
+                    <i class="bi bi-arrow-left me-1"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

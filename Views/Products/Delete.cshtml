@@ -1,0 +1,58 @@
+@model ProductManagement.Models.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<div class="container py-4" style="max-width: 600px;">
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index">Products</a></li>
+                <li class="breadcrumb-item active">Delete</li>
+            </ol>
+        </nav>
+        <h2 class="fw-bold text-danger"><i class="bi bi-exclamation-triangle me-2"></i>Delete Product</h2>
+    </div>
+
+    <div class="card border-danger shadow-sm">
+        <div class="card-body">
+            <div class="alert alert-danger d-flex align-items-center mb-4" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+                <div>
+                    <strong>Are you sure?</strong> This action cannot be undone.
+                    The product and all its data will be permanently removed.
+                </div>
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-4 text-muted">Product Name</dt>
+                <dd class="col-sm-8 fw-bold fs-5">@Model.Name</dd>
+
+                <dt class="col-sm-4 text-muted">Category</dt>
+                <dd class="col-sm-8">
+                    <span class="badge bg-secondary">@Model.Category</span>
+                </dd>
+
+                <dt class="col-sm-4 text-muted">Price</dt>
+                <dd class="col-sm-8 text-success fw-semibold">@Model.Price.ToString("C")</dd>
+
+                <dt class="col-sm-4 text-muted">Stock</dt>
+                <dd class="col-sm-8">@Model.Stock units</dd>
+            </dl>
+        </div>
+        <div class="card-footer bg-transparent">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-danger px-4">
+                        <i class="bi bi-trash me-1"></i> Yes, Delete
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-x-lg me-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
