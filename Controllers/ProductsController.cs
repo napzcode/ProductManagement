@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductManagement.Data;
+using ProductManagement.Filters;
 using ProductManagement.Models;
 
 namespace ProductManagement.Controllers
@@ -74,12 +75,14 @@ namespace ProductManagement.Controllers
         }
 
         // GET: Products/Create
+        [AdminOnly]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Products/Create
+        [AdminOnly]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
@@ -97,6 +100,7 @@ namespace ProductManagement.Controllers
         }
 
         // GET: Products/Edit/5
+        [AdminOnly]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -108,6 +112,7 @@ namespace ProductManagement.Controllers
         }
 
         // POST: Products/Edit/5
+        [AdminOnly]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
@@ -136,6 +141,7 @@ namespace ProductManagement.Controllers
         }
 
         // GET: Products/Delete/5
+        [AdminOnly]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -147,6 +153,7 @@ namespace ProductManagement.Controllers
         }
 
         // POST: Products/Delete/5
+        [AdminOnly]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
